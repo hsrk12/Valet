@@ -35,7 +35,7 @@ app.get('/get-data', (req, res) => {
 
   app.post('/parking', async (req, res) => {
     var blobUrl = req.body.imageUrl;
-    res.json(gpt(blobUrl));
+    res.json({result: gpt(blobUrl)});
   });
 
   async function gpt(blob) {
@@ -55,5 +55,6 @@ app.get('/get-data', (req, res) => {
       ],
     });
     console.log(response.choices[0]);
+    return completion.choices[0]?.message?.content;
   }
   

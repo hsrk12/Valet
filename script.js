@@ -69,7 +69,8 @@ document.addEventListener("DOMContentLoaded", function() {
           // Display the captured photo
           capturedPhoto.src = imageUrl;
           globalBlob = imageUrl;
-          console.log(globalBlob);
+          urlOnly = globalBlob.split('blob:')[1];
+          console.log(urlOnly);
           capturedPhoto.style.display = "block";
           
 
@@ -82,10 +83,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 $('#submitImage').click(function(){
+  console.log(JSON.stringify({ imageUrl: urlOnly }));
     $.ajax({
       type: 'POST',
       url: 'https://valetapp.netlify.app/parking',
-      data: JSON.stringify({ imageUrl: globalBlob }), 
+      data: JSON.stringify({ imageUrl: urlOnly }), 
       contentType: 'application/json',
       dataType: 'json',
       rossDomain: true,
@@ -95,7 +97,7 @@ $('#submitImage').click(function(){
       success: function(response){
       var descr = $('#parkingDescription');
       descr.empty();
-      descr.text = JSON.stringify(response);
+      descr.text = JSON.parse(response).result;
       },
     error: function(error){
     console.error('Error:', error);
