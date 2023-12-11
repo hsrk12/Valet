@@ -84,12 +84,18 @@ document.addEventListener("DOMContentLoaded", function() {
 $('#submitImage').click(function(){
     $.ajax({
       type: 'POST',
-      url: '/parking',
-      data: { imageUrl: globalBlob }, 
+      url: 'https://valetapp.netlify.app/parking',
+      data: JSON.stringify({ imageUrl: globalBlob }), 
+      contentType: 'application/json',
+      dataType: 'json',
+      rossDomain: true,
+      xhrFields: {
+      withCredentials: true,
+      },
       success: function(response){
       var descr = $('#parkingDescription');
       descr.empty();
-      descr.innerHTML = JSON.parse(response);
+      descr.text = JSON.stringify(response);
       },
     error: function(error){
     console.error('Error:', error);

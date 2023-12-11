@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const OpenAI = require("openai");
+const cors = require('cors');
 require('dotenv').config();
 const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 const bodyParser = require('body-parser');
@@ -9,9 +10,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 app.use(express.static(__dirname)); 
+
+app.use(cors({
+  origin: 'https://valetapp.netlify.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
