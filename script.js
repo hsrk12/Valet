@@ -86,7 +86,7 @@ $('#submitImage').click(function(){
   console.log(JSON.stringify({ imageUrl: urlOnly }));
     $.ajax({
       type: 'POST',
-      url: 'https://valetapp.netlify.app/parking',
+      url: '/parking',
       data: JSON.stringify({ imageUrl: urlOnly }), 
       contentType: 'application/json',
       dataType: 'json',

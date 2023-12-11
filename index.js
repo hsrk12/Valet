@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname)); 
 
 app.use(cors({
-  origin: 'https://valetapp.netlify.app',
+  origin: 'https://main--valetapp.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
